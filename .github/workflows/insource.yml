@@ -44,7 +44,7 @@ jobs:
           git switch -c temp-branch
           cd external-actions
           git clone https://github.com/${{ inputs.external-action }} ${{ inputs.external-action }}
-          rm ${{ inputs.external-action }}/.git*
+          rm -r ${{ inputs.external-action }}/.git*
           git add --all
           git commit -m "Add external marketplace action"
           git push --set-upstream origin temp-branch
