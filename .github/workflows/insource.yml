@@ -42,7 +42,7 @@ jobs:
           cd common
           git branch temp-branch
           cd ..
-          cp -r ${{ inputs.external-action }} common/external-actions/${{ inputs.external-action }}
+          cp -r ${{ inputs.external-action }} common/external-actions
           cd common
           git add -all
           git commit
