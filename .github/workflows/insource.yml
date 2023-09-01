@@ -28,27 +28,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
         uses: actions/checkout@v3
-        with:
-          path: common
+        # with:
+        #   path: common
 
-      - name: Checkout action repo
-        uses: actions/checkout@v3
-        with:
-          repository: ${{ inputs.external-action }}
-          path: external
+      # - name: Checkout action repo
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: ${{ inputs.external-action }}
+      #     path: external
       
       - name: Run command
         run: |
-          ls
-          ls external
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
-          cd common
           git switch -c temp-branch
-          cd ..
-          mkdir -p common/external-actions/${{ inputs.external-action }}
-          cp -R external/ common/external-actions/${{ inputs.external-action }}
-          cd common
+          cd external-actions
+          git glone https://github.com/${{ inputs.external-action }}
           git add --all
           git commit -m "Add external marketplace action"
           git push --set-upstream origin temp-branch
