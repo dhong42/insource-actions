@@ -39,9 +39,13 @@ jobs:
       
       - name: Run command
         run: |
-          pwd
-          ls
-          ls common
-          ls ${{ inputs.external-action }}
+          cd common
+          git branch temp-branch
+          cd ..
+          cp ${{ inputs.external-action }} common/external-actions/${{ inputs.external-action }}
+          cd common
+          git add -all
+          git commit
+          git push
 
 
