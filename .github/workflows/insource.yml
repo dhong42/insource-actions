@@ -48,6 +48,6 @@ jobs:
           cd common
           git add --all
           git commit -m "Add external marketplace action"
-          git push
+          git push --set-upstream origin temp-branch
 
 
