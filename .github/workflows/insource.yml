@@ -46,7 +46,8 @@ jobs:
           cd ..
           cp -R ${{ inputs.external-action }} common/external-actions
           cd common
-          git commit -a -m "Add external marketplace action"
+          git add --all
+          git commit -m "Add external marketplace action"
           git push
 
 
