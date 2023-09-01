@@ -43,7 +43,7 @@ jobs:
           git config --global user.name "github-actions"
           git switch -c temp-branch
           cd external-actions
-          git glone https://github.com/${{ inputs.external-action }}
+          git clone https://github.com/${{ inputs.external-action }}
           git add --all
           git commit -m "Add external marketplace action"
           git push --set-upstream origin temp-branch
