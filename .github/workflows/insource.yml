@@ -30,6 +30,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Echo
-        runs: echo ${{ inputs.external-action }}
+        run: echo ${{ inputs.external-action }}
 
 
