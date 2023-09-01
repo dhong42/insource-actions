@@ -34,7 +34,7 @@ jobs:
       - name: Checkout action repo
         uses: actions/checkout@v3
         with:
-          repository: inputs.external-action
+          repository: ${{ inputs.external-action }}
           path: ${{ inputs.external-action }}
       
       - name: Run command
