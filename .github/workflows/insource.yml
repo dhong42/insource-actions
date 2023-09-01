@@ -44,7 +44,7 @@ jobs:
           cd ..
           cp -r ${{ inputs.external-action }} common/external-actions
           cd common
-          git add -all
+          git add --all
           git commit
           git push
 
