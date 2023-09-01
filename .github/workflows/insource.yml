@@ -28,8 +28,20 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          path: common
 
-      - name: Echo
-        run: echo ${{ inputs.external-action }}
+      - name: Checkout action repo
+        uses: actions/checkout@v3
+        with:
+          repository: inputs.external-action
+          path: inputs.external-action
+      
+      - name: Run command
+        run: |
+          pwd
+          ls
+          ls common
+          ls ${{ inputs.external-action }}
 
 
