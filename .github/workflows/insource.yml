@@ -30,6 +30,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: common
+          ref: temp-branch
 
       - name: Checkout action repo
         uses: actions/checkout@v3
@@ -42,9 +43,8 @@ jobs:
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
           cd common
-          git branch temp-branch
           cd ..
-          cp -r ${{ inputs.external-action }} common/external-actions
+          cp -R ${{ inputs.external-action }} common/external-actions
           cd common
           git add --all
           git commit -m "Add external marketplace action"
