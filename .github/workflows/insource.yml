@@ -44,6 +44,7 @@ jobs:
           cd common
           git switch -c temp-branch
           cd ..
+          mkdir -p common/external-actions/${{ inputs.external-action }}
           cp -R external common/external-actions/${{ inputs.external-action }}
           cd common
           git add --all
