@@ -49,7 +49,7 @@ jobs:
           rm -r ${{ inputs.external-action }}/.git*
           git add --all
           git commit -m "Add external marketplace action"
-          git push --set-upstream origin temp-branch
+          git push --set-upstream origin ${{env.temp_branch}}
 
       - name: Create PR
         run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main"
