@@ -48,5 +48,9 @@ jobs:
           git add --all
           git commit -m "Add external marketplace action"
           git push --set-upstream origin temp-branch
+          git pr
+
+      - name: Create PR
+        run: gh pr create --base main --head temp-branch --title "Test PR" --body "Merge temp-branch into main"
 
 
