@@ -52,7 +52,7 @@ jobs:
           git push --set-upstream origin ${{env.temp_branch}}
 
       - name: Create PR
-        run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main"
+        run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main" --fill
         env:
           GH_TOKEN: ${{ github.token }}
 
