@@ -23,6 +23,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    env:
+      temp_branch: "temp-branch-${{ github.run_id }}"
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -41,7 +43,7 @@ jobs:
         run: |
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
-          git switch -c temp-branch
+          git switch -c ${{ env.temp_branch }}
           cd external-actions
           git clone https://github.com/${{ inputs.external-action }} ${{ inputs.external-action }}
           rm -r ${{ inputs.external-action }}/.git*
@@ -50,7 +52,7 @@ jobs:
           git push --set-upstream origin temp-branch
 
       - name: Create PR
-        run: gh pr create --base main --head temp-branch --title "Test PR" --body "Merge temp-branch into main"
+        run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main"
         env:
           GH_TOKEN: ${{ github.token }}
 
