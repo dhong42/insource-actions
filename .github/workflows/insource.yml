@@ -44,8 +44,7 @@ jobs:
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
           git switch -c ${{ env.temp_branch }}
-          cd external-actions
-          git clone https://github.com/${{ inputs.external-action }} ${{ inputs.external-action }}
+          git clone https://github.com/${{ inputs.external-action }} external-actions/${{ inputs.external-action }}
           rm -r ${{ inputs.external-action }}/.git*
           git add --all
           git commit -m "Add external marketplace action"
