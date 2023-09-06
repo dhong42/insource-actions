@@ -38,8 +38,17 @@ jobs:
       #   with:
       #     repository: ${{ inputs.external-action }}
       #     path: external
-      
+      - name: Check if action exists
+        id: file_check
+        run: |
+          if [ -d "external-actions/${{ inputs.external-action }}" ]
+          then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+        
       - name: Run command
+        if: steps.file_check.outputs.exists == 'true'
         run: |
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
@@ -51,6 +60,7 @@ jobs:
           git push --set-upstream origin ${{env.temp_branch}}
 
       - name: Create PR
+        if: steps.file_check.outputs.exists == 'true'
         run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main" --fill
         env:
           GH_TOKEN: ${{ github.token }}
