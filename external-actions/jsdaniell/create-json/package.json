@@ -1,0 +1,30 @@
+{
+  "name": "create-json",
+  "version": "1.1.2",
+  "description": "An Action to create .json file and use on others steps of actions in your workflow.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsdaniell/create-json.git"
+  },
+  "keywords": [
+    "json",
+    "action",
+    "github"
+  ],
+  "author": "jsdaniell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsdaniell/create-json/issues"
+  },
+  "homepage": "https://github.com/jsdaniell/create-json#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^4.0.0",
+    "vercel": "^19.1.2"
+  }
+}
