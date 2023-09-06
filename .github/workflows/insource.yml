@@ -46,7 +46,7 @@ jobs:
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
-        
+          fi
       - name: Run command
         if: steps.file_check.outputs.exists == 'true'
         run: |
