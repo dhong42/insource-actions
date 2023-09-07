@@ -15,6 +15,8 @@ on:
     inputs:
       external-action:
         type: string 
+      version:
+        type: string
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -53,7 +55,7 @@ jobs:
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
           git switch -c ${{ env.temp_branch }}
-          git clone https://github.com/${{ inputs.external-action }} external-actions/${{ inputs.external-action }}
+          git clone -b ${{ inputs.version }} --depth 1 https://github.com/${{ inputs.external-action }} external-actions/${{ inputs.external-action }}
           rm -r external-actions/${{ inputs.external-action }}/.git*
           git add --all
           git commit -m "Add external marketplace action"
