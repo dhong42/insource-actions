@@ -19,6 +19,6 @@ jobs:
             done
     call-reusable-workflow:
       needs: test
-      uses: dhong42/insource-actions/.github/workflows/insource.yml
+      uses: dhong42/insource-actions/.github/workflows/multi-insource.yml
       with: 
         actions: atlassian/gajira-login@v2.0.0 aharooms/jira-commenter@v1.0.5 hashicorp/vault-action
