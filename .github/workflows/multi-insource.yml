@@ -41,7 +41,7 @@ jobs:
             git add --all
             git commit -m "Cloned ${action_name}"
             git push --set-upstream origin ${{env.temp_branch}}
-            ((actions_cloned++))
+            # ((actions_cloned++))
           done
           echo "actions_cloned=$actions_cloned" >> $GITHUB_OUTPUT
 
