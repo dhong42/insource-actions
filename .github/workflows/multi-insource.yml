@@ -18,7 +18,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - run: echo ${{inputs.actions}}
+      - run: |
+          test=0
+          ((test++))
+          echo $test
       - name: Run command
         id: run
         env:
@@ -44,7 +47,6 @@ jobs:
             git add --all
             git commit -m "Cloned ${action_name}@${version}"
             git push --set-upstream origin ${{env.temp_branch}}
-            let "actions_cloned++"
           done
           echo "actions_cloned=$actions_cloned" >> $GITHUB_OUTPUT
 
