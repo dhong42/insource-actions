@@ -32,13 +32,13 @@ jobs:
             if [[ $action == *"@"* ]]; then
               action_name="$(echo $action | cut -d "@" -f 1)"
               version="$(echo $action | cut -d "@" -f 2)"
+              branch="-b"
               # git clone -b ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
             else
               action_name=$action
-              version=""
               # git clone --depth 1 https://github.com/${action_name} external-actions/${action_name}
             fi
-            git clone -b ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
+            git clone ${branch} ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
             rm -r external-actions/${action_name}/.git*
             git add --all
             git commit -m "Cloned ${action_name}@${version}"
