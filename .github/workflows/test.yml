@@ -17,4 +17,8 @@ jobs:
             for element in $TEST; do
               echo $element
             done
-            
+    call-reusable-workflow:
+      uses: insource.yml
+      with: 
+        external-action: sergeysova/jq-action
+        version: v2
