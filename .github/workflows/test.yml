@@ -14,5 +14,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - run: |
-            echo $TEST
+            for $element in ${TEST[@]}; do
+              echo $element
+            done
             
