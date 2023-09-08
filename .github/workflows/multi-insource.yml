@@ -42,7 +42,7 @@ jobs:
             fi
             if [ -d "external-actions/${action_name}" ]
             then
-              echo "Skipping ${action_name}. Already exists in repository." >> "$GITHUB_OUTPUT"
+              echo "Skipping ${action_name}. Already exists in repository."
               continue
             fi
             git clone ${branch} ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
