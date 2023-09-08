@@ -18,16 +18,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      - name: Check if action exists
-        id: file_check
-        run: |
-          if [ -d "external-actions/${{ inputs.external-action }}" ]
-          then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
+      - run: echo ${{inputs.action}}
       - name: Run command
         id: run
         run: |
