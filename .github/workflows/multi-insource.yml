@@ -40,6 +40,11 @@ jobs:
               branch=""
               # git clone --depth 1 https://github.com/${action_name} external-actions/${action_name}
             fi
+            if [ -d "external-actions/${action_name}" ]
+            then
+              echo "Skipping ${action_name}. Already exists in repository." >> "$GITHUB_OUTPUT"
+              continue
+            fi
             git clone ${branch} ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
             rm -r external-actions/${action_name}/.git*
             git add --all
