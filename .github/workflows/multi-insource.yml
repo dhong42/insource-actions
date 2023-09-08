@@ -45,8 +45,9 @@ jobs:
             git add --all
             git commit -m "Cloned ${action_name}@${version}"
             git push --set-upstream origin ${{env.temp_branch}}
-            $((actions_cloned++))
+            count=$((actions_cloned++))
           done
+          echo $count
           echo "actions_cloned=$actions_cloned" >> $GITHUB_OUTPUT
       - run: echo ${{steps.run.outputs.actions_cloned}}
       - name: Create PR
