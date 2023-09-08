@@ -53,7 +53,6 @@ jobs:
             count=$((actions_cloned++))
           done
           echo "actions_cloned=$actions_cloned" >> $GITHUB_OUTPUT
-      - run: echo ${{steps.run.outputs.actions_cloned}}
       - name: Create PR
         if: steps.run.outputs.actions_cloned > 0
         run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main" --fill
