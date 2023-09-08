@@ -29,6 +29,7 @@ jobs:
           git config --global user.name "github-actions"
           git switch -c ${{ env.temp_branch }}
           for action in $ACTIONS; do
+            echo $action
             if [[ $action == *"@"* ]]; then
               action_name="$(echo $action | cut -d "@" -f 1)"
               version="$(echo $action | cut -d "@" -f 2)"
