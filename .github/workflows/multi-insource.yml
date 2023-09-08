@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - run: echo ${{inputs.action}}
+      - run: echo ${{inputs.actions}}
       - name: Run command
         id: run
         run: |
@@ -28,8 +28,8 @@ jobs:
           git switch -c ${{ env.temp_branch }}
           for action in ${{ inputs.actions }}; do
             if [[ $action == *"@"* ]]; then
-              action_name="$(echo $action | cut "@" -f 1)"
-              version="$(echo $action | cut "@" -f 2)"
+              action_name="$(echo $action | cut -d "@" -f 1)"
+              version="$(echo $action | cut -d "@" -f 2)"
               git clone -b ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
             else
               action_name=$action
