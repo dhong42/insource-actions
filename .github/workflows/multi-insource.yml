@@ -23,7 +23,7 @@ jobs:
         env:
           ACTIONS: ${{ inputs.actions }}
         run: |
-          declare -i actions_cloned=0
+          actions_cloned=0
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
           git switch -c ${{ env.temp_branch }}
@@ -47,7 +47,6 @@ jobs:
             git push --set-upstream origin ${{env.temp_branch}}
             count=$((actions_cloned++))
           done
-          echo $count
           echo "actions_cloned=$actions_cloned" >> $GITHUB_OUTPUT
       - run: echo ${{steps.run.outputs.actions_cloned}}
       - name: Create PR
