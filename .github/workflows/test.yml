@@ -1,0 +1,16 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      test:
+        type: string
+        
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+          - run: |
+              echo ${{inputs.test}}
+            
