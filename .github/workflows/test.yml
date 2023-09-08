@@ -9,8 +9,10 @@ on:
 
 jobs:
     test:
-        runs-on: ubuntu-latest
-        steps:
-          - run: |
-              echo ${{inputs.test}}
+      env:
+        TEST: ${{inputs.test}}
+      runs-on: ubuntu-latest
+      steps:
+        - run: |
+            echo $TEST
             
