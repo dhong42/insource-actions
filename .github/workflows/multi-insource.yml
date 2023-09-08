@@ -1,0 +1,61 @@
+name: Auto Insource Multiple
+
+on:
+  workflow_dispatch:
+    inputs:
+      actions:
+        type: string 
+  workflow_call:
+    inputs:
+      actions:
+        type: string 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      temp_branch: "temp-branch-${{ github.run_id }}"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Check if action exists
+        id: file_check
+        run: |
+          if [ -d "external-actions/${{ inputs.external-action }}" ]
+          then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Run command
+        id: run
+        run: |
+          actions_cloned=0
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git config --global user.name "github-actions"
+          git switch -c ${{ env.temp_branch }}
+          for action in ${{ inputs.actions }}; do
+            if [[ $action == *"@"* ]]; then
+              action_name="$(echo $action | cut "@" -f 1)"
+              version="$(echo $action | cut "@" -f 2)"
+              git clone -b ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
+            else
+              action_name=$action
+              git clone --depth 1 https://github.com/${action_name} external-actions/${action_name}
+            fi
+            rm -r external-actions/${action_name}/.git*
+            git add --all
+            git commit -m "Cloned ${action_name}"
+            git push --set-upstream origin ${{env.temp_branch}}
+            ((actions_cloned++))
+          done
+          echo "actions_cloned=$actions_cloned" >> $GITHUB_OUTPUT
+
+      - name: Create PR
+        if: ${{ steps.run.outputs.actions_cloned > 0 }}
+        run: gh pr create --base main --head ${{env.temp_branch}} --title "Merge ${{env.temp_branch}} into main" --fill
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+
