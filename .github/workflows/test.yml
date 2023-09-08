@@ -18,7 +18,7 @@ jobs:
               echo $element
             done
     call-reusable-workflow:
-      uses: insource.yml
+      uses: ./.github/workflows/insource.yml
       with: 
         external-action: sergeysova/jq-action
         version: v2
