@@ -35,7 +35,7 @@ jobs:
               # git clone -b ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
             else
               action_name=$action
-              version="HEAD"
+              version=""
               # git clone --depth 1 https://github.com/${action_name} external-actions/${action_name}
             fi
             git clone -b ${version} --depth 1 https://github.com/${action_name} external-actions/${action_name}
